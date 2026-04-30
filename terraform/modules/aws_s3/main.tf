@@ -25,7 +25,7 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
 # 4. Attach a policy granting the world read access to the files
 resource "aws_s3_bucket_policy" "allow_public_read" {
   bucket = aws_s3_bucket.weather_app.id
-  
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -38,7 +38,7 @@ resource "aws_s3_bucket_policy" "allow_public_read" {
       },
     ]
   })
-  
+
   # Ensure the security block is removed BEFORE applying the policy
   depends_on = [aws_s3_bucket_public_access_block.public_access]
 }

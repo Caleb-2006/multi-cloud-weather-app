@@ -1,7 +1,7 @@
 module "aws_frontend" {
-  source      = "./modules/aws_s3"
+  source = "./modules/aws_s3"
   # Update this line to match the domain exactly
-  bucket_name = "www.emmanuelbuilds.space" 
+  bucket_name = "www.emmanuelbuilds.space"
 }
 
 module "azure_backup" {
@@ -11,7 +11,7 @@ module "azure_backup" {
 
 module "dns_routing" {
   source         = "./modules/route53"
-  domain_name    = "emmanuelbuilds.space" 
+  domain_name    = "emmanuelbuilds.space"
   aws_endpoint   = module.aws_frontend.website_endpoint
   azure_endpoint = module.azure_backup.website_endpoint
 }
@@ -33,7 +33,7 @@ resource "aws_s3_bucket_website_configuration" "redirect_config" {
 
 # 3. Create the Route 53 traffic rule for the naked domain
 resource "aws_route53_record" "naked_domain_record" {
-  zone_id = "Z05028571WPZV3AETIWY4" 
+  zone_id = "Z05028571WPZV3AETIWY4"
   name    = "emmanuelbuilds.space"
   type    = "A"
 
