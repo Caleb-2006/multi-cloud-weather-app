@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5000"
+    environment:
+      - OWM_API_KEY=${OWM_API_KEY}
+
+  frontend:
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - backend
